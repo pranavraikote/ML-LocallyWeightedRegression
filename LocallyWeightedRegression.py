@@ -1,11 +1,15 @@
+#Importing Modules
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+
+#Tou Value
 tou = 0.5
 
+#Reading data from the file
 data=pd.read_csv("lab10.csv")
 
-
+#Data Preprocessing 
 X_train = np.array(data.total_bill)
 X_train = X_train[:, np.newaxis]
 
@@ -16,6 +20,8 @@ y_train = np.array(data.tip)
 y_test = []
 
 count = 0
+
+#Calculation of parameters and prediction
 for r in range(len(X_test)):
         wts = np.exp(-np.sum((X_train - X_test[r]) ** 2, axis=1) / (2 * tou ** 2))
         W = np.diag(wts)
@@ -27,6 +33,8 @@ for r in range(len(X_test)):
         
 
 y_test = np.array(y_test)
+
+#Plotting graph for visualization of output
 plt.plot(X_train.squeeze(), y_train)
 plt.plot(X_test.squeeze(), y_test)
 plt.show()
